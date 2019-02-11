@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
     std::string json_input = create_json_input(); //Simulates PHP data
     PackGRASP pack;
     JsonParser parser(&pack);
-    parser.pg->v_box_b = std::vector<int>(10);
     parser.parse_grasp_input(json_input);
 
 

@@ -67,15 +67,18 @@ private:
 
 public:
     //Initial Parameters
-    std::vector<double> v_box_l;
-    std::vector<double> v_box_w;
-    std::vector<double> v_box_h;
+    std::vector<std::vector<double>> vv_box_lwh;
     std::vector<int> v_box_b;
-    std::vector<int> v_box_ID;
-    std::vector<std::vector<bool>> vv_box_orientation;
+    std::vector<std::string> v_box_ID;
+    std::vector<std::vector<bool>> vv_box_allowed_orientation;
+    double container_l;
+    double container_w;
+    double container_h;
 
+private:
+    std::vector<std::vector<int>> vv_box_index_orientation;
 
-
+    void init_parameters();
 };
 
 #endif // PACKGRASP_H
