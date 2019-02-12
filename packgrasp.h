@@ -12,6 +12,22 @@ public:
     ~PackGRASP(){}
     void optimize();
 
+    //Initial Parameters
+    std::vector<std::vector<double>> vv_box_lwh;
+    std::vector<int> v_box_b;
+    std::vector<std::string> v_box_ID;
+    std::vector<std::vector<bool>> vv_box_allowed_orientation;
+    double container_l;
+    double container_w;
+    double container_h;
+    int n_box_type;
+
+    enum en_exceptions
+    {
+        INVALID_DATA,
+    };
+
+
 private:
 
     /**
@@ -64,16 +80,6 @@ private:
         std::vector<int> v_index_occupied_state;
         double occupied_vol;
     };
-
-public:
-    //Initial Parameters
-    std::vector<std::vector<double>> vv_box_lwh;
-    std::vector<int> v_box_b;
-    std::vector<std::string> v_box_ID;
-    std::vector<std::vector<bool>> vv_box_allowed_orientation;
-    double container_l;
-    double container_w;
-    double container_h;
 
 private:
     std::vector<std::vector<int>> vv_box_index_orientation;

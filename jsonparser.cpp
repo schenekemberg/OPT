@@ -43,6 +43,7 @@ void JsonParser::parse_grasp_input(std::string xjson_input)
 
     QJsonObject json_obj = create_json_object(xjson_input);
     int n_boxes = json_obj["num_box_type"].toInt();
+    pg->n_box_type = n_boxes;
     initialize_grasp_input_parameters(n_boxes);
 
     QJsonArray M;
@@ -60,13 +61,15 @@ void JsonParser::parse_grasp_input(std::string xjson_input)
         pg->v_box_b[i] =                        col[3].toInt();
         QString buffer =                        col[4].toString();
         pg->v_box_ID[i] = buffer.toStdString();
-        pg->vv_box_allowed_orientation[i][0] =  col[5].toBool();
-        pg->vv_box_allowed_orientation[i][1] =  col[6].toBool();
-        pg->vv_box_allowed_orientation[i][2] =  col[7].toBool();
-        pg->vv_box_allowed_orientation[i][3] =  col[8].toBool();
-        pg->vv_box_allowed_orientation[i][4] =  col[9].toBool();
-        pg->vv_box_allowed_orientation[i][5] =  col[10].toBool();
+        pg->vv_box_allowed_orientation[i][0] =  col[5].toInt();
+        pg->vv_box_allowed_orientation[i][1] =  col[6].toInt();
+        pg->vv_box_allowed_orientation[i][2] =  col[7].toInt();
+        pg->vv_box_allowed_orientation[i][3] =  col[8].toInt();
+        pg->vv_box_allowed_orientation[i][4] =  col[9].toInt();
+        pg->vv_box_allowed_orientation[i][5] =  col[10].toInt();
      }
+
+
 }
 
 QJsonObject JsonParser::create_json_object(std::string xjson_input)
@@ -96,7 +99,7 @@ QJsonObject JsonParser::create_json_object(std::string xjson_input)
 /**
  * @brief JsonParser::initialize_grasp_input_parameters
  * @param xn_boxes
- * Initialize the structures in the PackGrasp object
+ * Initialize the structures in the PackGrasp object, (vectors)
  */
 void JsonParser::initialize_grasp_input_parameters(int xn_boxes)
 {
