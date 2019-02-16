@@ -25,6 +25,12 @@ std::string debug_get_data_from_txt(const string xfilename)
         string trash;
 
         in_file >> trash;
+        double time_limit = 0.0;
+        in_file >> time_limit;
+
+        json_object["time_limit"] = time_limit;
+
+        in_file >> trash;
         double container_l = 0.0;
         double container_w = 0.0;
         double container_h = 0.0;
@@ -78,6 +84,9 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     std::string json_input = debug_get_data_from_txt(argv[1]); //Simulates PHP data
+
+    cout << json_input << endl;
+
     PackGRASP pack;
     JsonParser parser(&pack);
     parser.pg->v_box_b = std::vector<int>(10);
