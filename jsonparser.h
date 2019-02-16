@@ -25,6 +25,9 @@ public:
     PackGRASP* pg;
 
 private:
+    QJsonObject create_json_object(std::string xjson_input);
+    void initialize_grasp_input_parameters(int xn_boxes);
+
 
 };
 

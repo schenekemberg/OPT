@@ -17,8 +17,10 @@ std::string debug_get_data_from_txt(const string xfilename)
 
     QJsonObject json_object;
 
-    const std::string filename = "INSTANCES//" + xfilename + ".txt";
+    const std::string filename = "C:\\Users\\user\\Documents\\Alexandre\\C++\\GRASP_Conteiner\\build-GRASP-Desktop_Qt_5_10_0_MinGW_32bit-Debug\\debug\\INSTANCES\\" + xfilename + ".txt";
     std::ifstream in_file(filename.c_str());
+
+    cout << filename << endl;
 
     if (in_file.is_open())
     {
@@ -45,6 +47,7 @@ std::string debug_get_data_from_txt(const string xfilename)
         in_file >> trash;
         int num_box_type = 0;
         in_file >> num_box_type;
+        json_object["num_box_type"] = num_box_type;
 
         in_file >> trash;
         QJsonArray json_rows;
@@ -66,7 +69,7 @@ std::string debug_get_data_from_txt(const string xfilename)
             }
             json_rows.append(json_cols);
         }
-        json_object["array"] = json_rows;
+        json_object["M"] = json_rows;
 
         in_file.close();
     }else
@@ -82,15 +85,21 @@ std::string debug_get_data_from_txt(const string xfilename)
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
     std::string json_input = debug_get_data_from_txt(argv[1]); //Simulates PHP data
 
     cout << json_input << endl;
 
     PackGRASP pack;
     JsonParser parser(&pack);
-    parser.pg->v_box_b = std::vector<int>(10);
-    parser.parse_grasp_input(json_input);
+    //parser.parse_grasp_input(json_input);
+
+    try
+    {
+      pack.optimize();
+    } catch (exception& e )
+    {
+        cout << e.what();
+    }
 
     std::cout << json_input;
     return a.exec();
