@@ -51,6 +51,7 @@ void JsonParser::parse_grasp_input(std::string xjson_input)
     pg->container_h = json_obj["container_h"].toDouble();
     pg->container_l = json_obj["container_l"].toDouble();
     pg->container_w = json_obj["container_w"].toDouble();
+    pg->time_limit = json_obj["time_limit"].toDouble();
 
     for(size_t i = 0; i < static_cast<size_t>(M.size()) ; i++)
     {
@@ -61,7 +62,7 @@ void JsonParser::parse_grasp_input(std::string xjson_input)
         pg->v_box_b[i] =                        col[3].toInt();
         QString buffer =                        col[4].toString();
         pg->v_box_ID[i] = buffer.toStdString();
-        pg->vv_box_allowed_orientation[i][0] =  col[5].toInt();
+        pg->vv_box_allowed_orientation[i][0] =  col[5].toBool();
         pg->vv_box_allowed_orientation[i][1] =  col[6].toInt();
         pg->vv_box_allowed_orientation[i][2] =  col[7].toInt();
         pg->vv_box_allowed_orientation[i][3] =  col[8].toInt();
