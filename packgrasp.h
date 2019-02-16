@@ -11,9 +11,32 @@ class PackGRASP:public OptObject
 {
 public:
 
+
+    /**
+     * @brief The OutputSolution struct
+     * This solution is a "pre" parse for the json output.
+     * For each state in the solution sequence, the stacks of boxes should
+     * be extracted into individual boxes (orientations), in order for
+     * the UI to be able to draw them
+     * vv_out_packed_boxes    : [[ID_state,ID_Box,x,y,z,l,w,h],[...]}
+     * vv_out_unpacked_boxes  : [[ID_box,total_unpacked_box],[...]]
+     * vv_out_packed_states   : [[ID_state,ID_Box,x,y,z,l,w,h],[...]]
+     */
+    struct OutputSolutionGRASP
+    {
+        std::vector<std::vector<std::string>> vv_out_packed_boxes;
+        std::vector<std::vector<std::string>> vv_out_packed_states;
+        std::vector<std::vector<std::string>> vv_out_unpacked_boxes;
+        std::string occupied_vol;
+        std::string run_time;
+        std::string status;
+    };
+
+
     PackGRASP();
     ~PackGRASP(){}
     void optimize();
+    OutputSolutionGRASP get_pre_parse_solution();
 
     //Initial Parameters
     std::vector<std::vector<double>> vv_box_lwh;
@@ -25,6 +48,7 @@ public:
     double container_h = 0;
     int n_box_type = 0;
     double time_limit = 2;
+
 
     enum en_exceptions
     {
@@ -95,24 +119,7 @@ private:
 
     };
 
-    /**
-     * @brief The OutputSolution struct
-     * This solution is a "pre" parse for the json output.
-     * For each state in the solution sequence, the stacks of boxes should
-     * be extracted into individual boxes (orientations), in order for
-     * the UI to be able to draw them
-     * vv_out_packed_boxes    : [[box_type,x,y,z,l,w,h,ID],[...]}
-     * vv_out_unpacked_boxes  : [[box_type,ID,total_unpacked_box],[...]]
-     */
-    struct OutputSolution
-    {
-        std::vector<std::vector<std::string>> vv_out_packed_boxes;
-        std::vector<std::vector<std::string>> vv_out_unpacked_boxes;
-        std::string occupied_vol;
-        std::string run_time;
-        std::string status;
 
-    };
 
     //Functions/ Routines
     void init_parameters();
@@ -121,6 +128,9 @@ private:
     void build(Solution &xsol);
     double get_sol_occupied_vol(Solution &xsol);
     void select_random_sequence(Solution &xsol);
+    void create_new_state(Solution &xsol);
+    void update_state_variables(Solution &xsol);
+
 
     //Data structures
     std::vector<std::vector<int>> vv_box_index_orientation;
