@@ -18,7 +18,8 @@ SOURCES += \
         main.cpp \
     optobject.cpp \
     packgrasp.cpp \
-    jsonparser.cpp
+    jsonparser.cpp \
+    general_functions.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -28,4 +29,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     optobject.h \
     packgrasp.h \
-    jsonparser.h
+    jsonparser.h \
+    general_functions.h

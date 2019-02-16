@@ -17,7 +17,51 @@ void JsonParser::set_PackGRASP(PackGRASP *xp_pg)
 
 std::string JsonParser::parse_grasp_output()
 {
+    std::string grasp_json_output = "";
+    PackGRASP::OutputSolutionGRASP out_grasp = pg->get_pre_parse_solution();
 
+    //object
+
+    //Object["occupied_vol"] = occupied_vol
+    //Object["run_time"] = run_time
+    //Object["status"] = status
+
+    //Object["unpacked_boxes"]
+     /* vv_out_unpacked_boxes   >>   array[i]
+     *    cada "i" é um objeto, com:
+     *    array["ID_box"]
+     *    array["total_unpacked_box"]
+    */
+
+    //Object["packed_boxes"]
+     /* vv_out_packed_boxes   >>   array[i]
+     *    cada "i" é um objeto, com:
+     *    array["ID_state"]
+     *    array["ID_box"]
+     *    array["x"]
+     *    array["y"]
+     *    array["z"]
+     *    array["l"]
+     *    array["w"]
+     *    array["h"]
+    */
+
+    //Object["packed_states"]
+     /* vv_out_packed_boxes   >>   array[i]
+     *    cada "i" é um objeto, com:
+     *    array["ID_state"]
+     *    array["ID_box"]
+     *    array["x"]
+     *    array["y"]
+     *    array["z"]
+     *    array["l"]
+     *    array["w"]
+     *    array["h"]
+    */
+
+
+
+    return grasp_json_output;
 }
 
 /**

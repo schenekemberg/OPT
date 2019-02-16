@@ -84,6 +84,7 @@ std::string debug_get_data_from_txt(const string xfilename)
 
 int main(int argc, char *argv[])
 {
+    //srand(time(NULL));
     QCoreApplication a(argc, argv);
     std::string json_input = debug_get_data_from_txt(argv[1]); //Simulates PHP data
 
@@ -91,15 +92,7 @@ int main(int argc, char *argv[])
 
     PackGRASP pack;
     JsonParser parser(&pack);
-    //parser.parse_grasp_input(json_input);
-
-    try
-    {
-      pack.optimize();
-    } catch (exception& e )
-    {
-        cout << e.what();
-    }
+    parser.parse_grasp_input(json_input);
 
     std::cout << json_input;
     return a.exec();
