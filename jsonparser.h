@@ -15,13 +15,17 @@
 class JsonParser
 {
 public:
+
     JsonParser();
     JsonParser(PackGRASP* xp_pg);
     void set_PackGRASP(PackGRASP* xp_pg);
 
     //GRASP
-    std::string parse_grasp_output();
-    void parse_grasp_input(std::string xjson_input);
+    QJsonObject parse_grasp_output();
+    void parse_grasp_input(QJsonObject xjson_root_object);
+    QJsonArray parse_grasp_unpacked_boxes(PackGRASP::OutputSolutionGRASP &xpre_parsed_sol);
+    QJsonArray parse_grasp_packed_boxes(PackGRASP::OutputSolutionGRASP &xpre_parsed_sol);
+    QJsonArray parse_grasp_packed_states(PackGRASP::OutputSolutionGRASP &xpre_parsed_sol);
     PackGRASP* pg;
 
 private:

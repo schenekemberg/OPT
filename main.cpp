@@ -90,9 +90,13 @@ int main(int argc, char *argv[])
 
     cout << json_input << endl;
 
+   string json_output = MasterController::run_( json_input );
+
     PackGRASP pack;
     JsonParser parser(&pack);
     parser.parse_grasp_input(json_input);
+    pack.optimize();
+    string json_output = parser.parse_grasp_output();
 
     std::cout << json_input;
     return a.exec();
